@@ -22,14 +22,14 @@ export default function CameraGalleryApp (){
   const cameraRef = useRef(null)
 
   useEffect(()=>{
-    requestGalleryPermission()
-  }, [/**Las dependecnias van aqui*/]) 
+    requestGalleryPermission(); 
+  }, [/**Las dependecnias van aqui*/]);  
 
   const requestGalleryPermission = async()=>{ //Es asincrona dado que se requiere que el usuario conteste
-    const GalleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync()
-    setHasGalleryPermission(GalleryStatus === 'granted') //Si yo le pongo esto es que es true 
+    const GalleryStatus = await ImagePicker.requestMediaLibraryPermissionsAsync(); 
+    setHasGalleryPermission(GalleryStatus.status === 'granted') //Si yo le pongo esto es que es true 
 
-    if (GalleryStatus !== 'granted'){
+    if (GalleryStatus.status !== 'granted'){
       Alert.alert('Permiso denegado', 'Se necesita el acceso a la galeria para usar esta funcion')
     }
   }
@@ -165,7 +165,7 @@ export default function CameraGalleryApp (){
 
       {captureImage && (
         <TouchableOpacity
-          style={styles.clearBtn}
+           style={[styles.Btn, styles.clearBtn]}
           onPress={()=> setCaptureImage(null)} // Se borra la foto
         >
           <Text style={styles.btnTxt}>🧹 Limpiar Imagen</Text>
@@ -205,11 +205,11 @@ const styles = StyleSheet.create({
     paddingVertical: 15, 
     borderRadius: 10, 
     marginVertical: 10, 
-    minwidth: 200,
+    minWidth: 200,
     alignItems:'center' 
   }, 
   clearBtn: {
-    backgroundColor: '#ff3b30',
+    backgroundColor: '#FF3B30',
   }, 
   btnTxt: {
     color: '#fff', 
