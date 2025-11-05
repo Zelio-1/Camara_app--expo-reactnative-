@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef} from "react";
 import {View, Text, TouchableOpacity, Image, StyleSheet, Alert} from 'react-native'; 
 import {CameraView, useCameraPermissions} from 'expo-camera'; 
 import * as ImagePicker from 'expo-image-picker'; 
+import * as MediaLibrary from 'expo-media-library'; 
 
 export default function CameraGalleryApp (){
 
@@ -49,6 +50,19 @@ export default function CameraGalleryApp (){
     }
   }
 
+
+  // Funcion para guardar la imagen en la galeria 
+  const saveImage = async () =>{
+    if (captureImage){
+      try {
+        await MediaLibrary.createAssetAsync(captureImage); // Guardando la URL de la imagen  
+        Alert.alert('Imagen guardada exitosamente 🎉')
+        setCaptureImage(null); 
+      } catch (error) {
+        console.log('Error: ',error)
+      }
+    }
+  }
 
   // Funcion para abrir la galeria
   const pickImageFromGallery = async ()=>{
@@ -165,10 +179,19 @@ export default function CameraGalleryApp (){
 
       {captureImage && (
         <TouchableOpacity
-           style={[styles.Btn, styles.clearBtn]}
+          style={[styles.Btn, styles.clearBtn]}
           onPress={()=> setCaptureImage(null)} // Se borra la foto
         >
           <Text style={styles.btnTxt}>🧹 Limpiar Imagen</Text>
+        </TouchableOpacity>
+      )}
+
+      {captureImage && (
+        <TouchableOpacity
+          style={[styles.Btn, styles.saveBtn]}
+          onPress={saveImage}
+        >
+          <Text style={styles.btnTxt}>✅ Guardar imagen</Text>
         </TouchableOpacity>
       )}
       
@@ -259,5 +282,8 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 30,
     backgroundColor: '#fff'
+  }, 
+  saveBtn: {
+    backgroundColor: '#1f982fff'
   }
 })
