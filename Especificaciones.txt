@@ -1,0 +1,9 @@
+Para crear el proyecto: npx create-expo-app@latest camara --template blank 
+
+Para usar la camara hay que usar Expo Camera. Para ver la galeria se usa Expo ImagePicker
+
+Hay que implementar Expo MediaLibrary para tener acceso a la galeria 
+
+Instalar los paquetes necesarios: npx expo install expo-camera expo-image-picker
+
+useEffect: Lo que se pomnga adentro de el se ejecuta la primera vez que se ejecuta el componente o cualquiera de su dependencias
