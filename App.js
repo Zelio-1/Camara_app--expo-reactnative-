@@ -166,7 +166,7 @@ export default function CameraGalleryApp (){
       {captureImage && (
         <TouchableOpacity
           style={styles.clearBtn}
-          onPress={()=> setCaptureImage(full)} // Se borra la foto
+          onPress={()=> setCaptureImage(null)} // Se borra la foto
         >
           <Text style={styles.btnTxt}>🧹 Limpiar Imagen</Text>
         </TouchableOpacity>
